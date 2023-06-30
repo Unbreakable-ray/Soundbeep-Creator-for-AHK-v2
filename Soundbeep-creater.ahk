@@ -19,7 +19,7 @@ MyGui_Create(){
 
 
 	MyGui := Gui(, "New Gui")
-    
+    MyGui.Title := ("Soundbeep Maker for AHKv2 [Beta]")
 
 	ggSldrDuration := MyGui.AddSlider("x7 y108 w421", "")
 	ggSldrDuration.OnEvent("Change", (GuiObj,Info)=>(mathDuration()))
