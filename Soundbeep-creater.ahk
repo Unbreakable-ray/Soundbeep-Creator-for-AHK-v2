@@ -39,15 +39,62 @@ MyGui_Create(){
 	gBtnTest := MyGui.AddButton("x10 y157 w417 h80", "&Test")
 	gBtnTest.OnEvent("Click", (GuiObj,Info)=>(mathSoundBeepPlay()))
     
-    gTxtModfr := MyGui.AddText("x10 y250 w40 h15", "Modfi /")
+    
 
-    gEditModfr := myGui.Add("Edit", "x80 y245 w50 h21 ")
+   ; gEditModfr := myGui.Add("Edit", "x80 y245 w50 h21 Number ")
+   ; gEditModfr.OnEvent("Change",(GuiObj,Info)=>(mdfrMath()))
     
-    gUpDwn := myGui.Add("UpDown", "x89 y250 w80 h90  -Horz", "2")
-    gUpDwn.OnEvent("Change",(GuiObj,Info)=>(mdfrMath()))
-    gEditModfr.OnEvent("Change",(GuiObj,Info)=>(mdfrMath()))
+    ;gEditModfr2 := myGui.Add("Edit", "x140 y245 w50 h21 Number ")
+   
+   ; gUpDwn2 := myGui.Add("UpDown", "x140 y250 w80 h90  -Horz", "1")
+   ; gUpDwn2.OnEvent("Change",(GuiObj,Info)=>(mdfrMath()))
+
+    ;gUpDwn := myGui.Add("UpDown", "x10 y245 w50 h21  -Horz", "1")
+    ;gUpDwn.OnEvent("Change",(GuiObj,Info)=>(mdfrMath()))
     
-    gSldrMod:= myGui.Add("Slider", "x272 y304 w266 h32 +NoTicks +Center +Tooltip", "50")
+  
+    myGui.Add("Text", "x180 y245 w900 h23 +0x200", ",rrrryyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyrrr")
+    ;myGui.Add("UpDown", "x40 y368 w15 h0", "1")
+    
+    
+    gTxtModfr := MyGui.AddText("x10 y250 w90 h15", "Freq. Modifier /")
+    
+    Edit_1 := myGui.Add("Edit", "x90 y245 w40 h21 number", "1")
+    myGui.Add("UpDown", "x56 y245 w18 h21", "1")
+    Edit_2 := myGui.Add("Edit", "x140 y245 w50 h21 Number", "1")
+    myGui.Add("UpDown", "x132 y245 w18 h21", "1")
+    Edit_1.OnEvent("Change", OnEventHandler)
+    Edit_2.OnEvent("Change", OnEventHandler)
+    myGui.OnEvent('Close', (*) => ExitApp())
+    myGui.Title := "Window"
+    myGui.Show("w620 h440")
+
+gMiniSlddr := MyGui.Add("Slider", "x195 y245 w240 h20")
+
+
+
+OnEventHandler(*)
+{
+	ToolTip("Click! This is a sample action.`n"
+	. "Active GUI element values include:`n"  
+	. "Edit_1 => " Edit_1.Value "`n" 
+	. "Edit_2 => " Edit_2.Value "`n", 77, 277)
+
+
+	SetTimer () => ToolTip(), -3000 ; tooltip timer
+}
+
+;////// duration GUI
+
+
+
+
+
+
+    
+
+    
+    ;gSldrMod:= myGui.Add("Slider", "x272 y304 w266 h32 +NoTicks +Center +Tooltip", "50") ;y304
 
    
 
@@ -134,9 +181,9 @@ MyGui_Create(){
  mdfrMath(){
     mdfr := gEditModfr.Value
     ;mdfr := RegExReplace(mdfr, "(\+|`"|=|@)", "")
-    mdfr := RegExReplace( mdfr, '[=%^&*%|/\\]', "")  ;!-/@:#+
+    ;mdfr := RegExReplace( mdfr, '[=%^&*%|/\\]', "")  ;!-/@:#+
     gEditModfr.Value:= mdfr
-    if (RegExMatch(mdfr,"[A-Za-z],"))
+    if (RegExMatch(mdfr,"[A-Za-z]"))
         {
         MsgBox "Only numbers allowed"
         mdfr := 1
